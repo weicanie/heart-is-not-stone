@@ -1,0 +1,153 @@
+generator client {
+  provider      = "prisma-client-js"
+  // 提高兼容性
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+  output        = "../generated/client"
+}
+
+/**
+ * generator docs {
+ * provider = "node node_modules/prisma-docs-generator"
+ * output   = "../generated/docs"
+ * }
+ */
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+//用户
+model user {
+  id        Int       @id @default(autoincrement())
+  username  String    @unique(map: "username") @db.VarChar(50)
+  password  String    @db.VarChar(500)
+  create_at DateTime? @default(now()) @db.Timestamp(0)
+  update_at DateTime? @default(now()) @db.Timestamp(0)
+  email     String    @db.VarChar(100)
+
+  cur_game_archive_id Int? // 当前游玩的游戏档案id
+  cur_ai_npc_name     String? @db.VarChar(50) // 当前对话的ai npc 名称
+
+  role      String  @default("user") // 新增角色字段，默认为普通用户
+  is_banned Boolean @default(false) // 用户是否被封禁
+
+  user_notifications UserNotification[] // 用户通知的中间表
+  user_violations    UserViolation[] // 用户违规记录
+}
+
+//游戏档案 e.g. 约娜火法档、阿娜大剑档、阿娜大剑档2
+model game_archive {
+  id                Int    @id @default(autoincrement())
+  name              String @db.VarChar(50) // 档案名称
+  role_name         String @db.VarChar(50) // 游玩角色
+  personality_trend Int    @default(0) // 人格倾向，-100 ~ +100（恶~善）
+
+  user_id Int //逻辑外键，指向user表的id
+
+  create_at DateTime? @default(now()) @db.Timestamp(0)
+  update_at DateTime? @default(now()) @db.Timestamp(0)
+}
+
+model ai_npc {
+  id              Int    @id @default(autoincrement())
+  name            String @db.VarChar(50) // npc名称
+  game_archive_id Int //逻辑外键，指向game_archive表的id
+
+  status            String  @default("normal") @db.VarChar(50) // npc状态，默认活跃
+  relationshipValue Int     @default(0) // 好感度，默认0
+  relationshipTier  String  @default("strange") @db.VarChar(50) // 好感度等级，默认陌生
+  gift_given        Boolean @default(false) // 是否已赠礼
+
+  specialRelationship Json? // 特殊关系，例如：['lover','parent']
+  traits              Json? // 特质，例如：['freeAndAlone','liveInRevenge']
+
+  create_at DateTime? @default(now()) @db.Timestamp(0)
+  update_at DateTime? @default(now()) @db.Timestamp(0)
+}
+
+// 与AI NPC的对话历史
+model ai_conversation {
+  id      Int     @id @default(autoincrement())
+  keyname String  @unique @db.VarChar(100) // 对话唯一标识
+  history Json? //ai（langchain）使用的聊天历史
+  summary String? @db.Text // 对话摘要
+
+  game_archive_id Int //逻辑外键，指向game_archive表的id
+  npc_name        String @db.VarChar(50) // 对话npc名称
+
+  create_at DateTime? @default(now()) @db.Timestamp(0)
+  update_at DateTime? @default(now()) @db.Timestamp(0)
+}
+
+// 游玩目标
+model play_target {
+  id      Int     @id @default(autoincrement())
+  name    String  @db.VarChar(500) // 名称
+  icon    String  @db.VarChar(500) // 图标URL
+  done    Boolean @default(false) // 是否完成
+  descTxt String  @db.Text // 文字描述
+  descMd  String? @db.Text // Markdown描述
+
+  game_archive_id Int //逻辑外键，指向game_archive表的id
+}
+
+// 网站状态
+model WebsiteStatus {
+  id        Int      @id @default(autoincrement())
+  status    String // 'online', 'maintenance'
+  message   String?  @db.Text
+  update_at DateTime @default(now()) @updatedAt
+}
+
+// 通知
+model Notification {
+  id          Int      @id @default(autoincrement())
+  title       String
+  content     String   @db.Text
+  create_at   DateTime @default(now())
+  target_user Int? // null表示全体用户，否则为特定用户的id
+
+  user_notifications UserNotification[] // 用户通知的中间表
+
+  @@index([target_user])
+}
+
+// 用户通知中间表，记录用户是否已读
+model UserNotification {
+  id              Int          @id @default(autoincrement())
+  user_id         Int
+  notification_id Int
+  is_read         Boolean      @default(false)
+  user            user         @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  notification    Notification @relation(fields: [notification_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, notification_id])
+  @@index([user_id])
+  @@index([notification_id])
+}
+
+// 黑名单邮箱，用于封禁用户
+model BannedEmail {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  reason    String?  @db.Text
+  create_at DateTime @default(now())
+
+  @@index([email])
+}
+
+// 用户违规记录
+model UserViolation {
+  id          Int      @id @default(autoincrement())
+  user_id     Int
+  email       String
+  type        String // 违规类型，如 'junk_content', 'sensitive_content', 'other'
+  description String?  @db.Text
+  create_at   DateTime @default(now())
+
+  user user @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([user_id])
+  @@index([email])
+}

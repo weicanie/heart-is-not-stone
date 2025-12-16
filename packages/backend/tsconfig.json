@@ -1,0 +1,32 @@
+{
+	"compilerOptions": {
+		"module": "NodeNext",
+		"declaration": true,
+		"removeComments": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"allowSyntheticDefaultImports": true,
+		"target": "ES2021",
+		"sourceMap": true,
+		"outDir": "./dist",
+		"baseUrl": "./",
+		"incremental": true,
+		"skipLibCheck": true,
+		"strictNullChecks": true,
+		"forceConsistentCasingInFileNames": true,
+		"noImplicitAny": false,
+		"strictBindCallApply": true,
+		"noFallthroughCasesInSwitch": false,
+		"isolatedModules": true,
+		"paths": {
+			"@/*": ["src/*"],
+			"@app/*": ["src/app/*"],
+			"@business/*": ["src/business/*"],
+			"@agent/*": ["src/agent/*"],
+			"@utils/*": ["src/utils/*"],
+			"@types/*": ["src/type/*"],
+			"@prisma/*": ["./prisma/generated/*"]
+		}
+	},
+	"include": ["src", "test/**/*.ts"]
+}

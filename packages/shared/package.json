@@ -1,0 +1,33 @@
+{
+	"name": "@not_stone/shared",
+	"version": "1.0.0",
+	"private": true,
+	"author": "weicanie",
+	"description": "Shared types and utilities",
+	"main": "dist/index.js",
+	"module": "dist/index.mjs",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "tsup src/index.ts --dts",
+		"dev": "tsup src/index.ts --dts --watch"
+	},
+	"devDependencies": {
+		"@types/node": "^20.3.1",
+		"tsup": "^8.5.0",
+		"typescript": "^5.9.2"
+	},
+	"exports": {
+		".": {
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		}
+	},
+	"gitHead": "d528dbb9c4aa674d7948ddd6244cf8752c172994",
+	"dependencies": {
+		"rxjs": "^7.8.1"
+	}
+}

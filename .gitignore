@@ -1,0 +1,42 @@
+node_modules/
+ai_prompts/
+**/*.prompts.md
+packages/backend/generated
+/docker-data
+**/*.log
+/nginx/logs/*
+/projects
+/resumes
+/models/*
+/project_wikis
+/user_data/*
+/marketing
+# Node.js
+/node_modules
+.pnpm-store
+/dist
+/coverage
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.eslintcache
+
+# VSCode
+.vscode/
+
+
+# Python
+# Ignore virtual environments anywhere in the project
+**/.venv/
+**/__pycache__/
+*.pyc
+*.pyo
+.python-version
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+
+.VSCodeCounter
