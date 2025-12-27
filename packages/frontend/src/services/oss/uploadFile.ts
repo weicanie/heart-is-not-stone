@@ -1,4 +1,4 @@
-import type { ServerDataFormat } from '@prisma-ai/shared';
+import type { ServerDataFormat } from '@not_stone/shared';
 import { instance } from '../config';
 /**
  * 前端通过后端直传文件到OSS

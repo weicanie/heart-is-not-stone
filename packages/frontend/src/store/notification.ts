@@ -1,4 +1,4 @@
-import type { UserNotification } from '@prisma-ai/shared';
+import type { UserNotification } from '@not_stone/shared';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 interface NotificationState {

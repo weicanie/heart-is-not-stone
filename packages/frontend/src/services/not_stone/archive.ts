@@ -4,7 +4,7 @@ import {
 	type GameArchive,
 	type ModAccountData,
 	type ServerDataFormat as SDF
-} from '@prisma-ai/shared';
+} from '@not_stone/shared';
 import { instance_not_stone as instance } from './config';
 
 // 获取所有档案

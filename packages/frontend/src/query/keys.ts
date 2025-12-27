@@ -1,5 +1,3 @@
-
-
 export const MANAGE_QUERY_KEY = {
 	USERS: 'manage_users',
 	SERVICE_STATUS: 'manage_service_status',

@@ -1,4 +1,4 @@
-import { SelectedLLM, type SsePipeHook } from '@prisma-ai/shared';
+import { SelectedLLM, type SsePipeHook } from '@not_stone/shared';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { eventBusService, EventList } from '../../utils/EventBus/event-bus.service';
 import type { StartParams } from './type';

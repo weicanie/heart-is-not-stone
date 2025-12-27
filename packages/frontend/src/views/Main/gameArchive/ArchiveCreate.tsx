@@ -25,7 +25,7 @@ import {
 } from '@/components/ui/select';
 import { createArchive } from '@/services/not_stone';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { cnNameToEnglish, LLMCanUse } from '@prisma-ai/shared';
+import { cnNameToEnglish, LLMCanUse } from '@not_stone/shared';
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';

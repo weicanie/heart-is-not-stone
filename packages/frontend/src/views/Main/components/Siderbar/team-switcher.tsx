@@ -41,7 +41,7 @@ export function TeamSwitcher({
 						<div className="relative right-[19px] top-[1px] grid flex-1 text-left text-sm leading-tight">
 							<span className="truncate font-semibold">
 								{/* {activeTeam.name} */}
-								<span className="ml-3 text-[15px] text-[rgb(86,145,225)]">魔历</span>
+								<span className="ml-3 text-[15px] text-[rgb(86,145,225)]">心非木石</span>
 							</span>
 							{/* <span className="truncate text-xs text-zinc-300">{activeTeam.plan}</span> */}
 						</div>

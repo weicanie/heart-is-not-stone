@@ -11,7 +11,6 @@ import { useCallback, useEffect, useRef, type FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '../../../../components/ui/button';
 import { cn } from '../../../../lib/utils';
-import { selectProjectMd } from '../../../../store/projects';
 import './theme.css'; //编辑器主题样式
 
 export interface EditorProps {
@@ -37,7 +36,7 @@ export const Editor: FC<EditorProps> = ({
 	isCardMode
 }) => {
 	const isShwoMode = type === 'show';
-	const md = useSelector(mdSelector ? mdSelector : selectProjectMd); //获取编辑器内容，默认为项目经验的md
+	const md = useSelector(mdSelector ? mdSelector : () => ''); //获取编辑器内容，默认为项目经验的md
 	const { resolvedTheme } = useTheme();
 
 	let crepe: Crepe;

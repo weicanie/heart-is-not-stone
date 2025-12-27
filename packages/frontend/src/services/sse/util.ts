@@ -7,7 +7,7 @@ import type {
 	LLMSessionStatusResponse,
 	ServerDataFormat as SDF,
 	SsePipeUtil
-} from '@prisma-ai/shared';
+} from '@not_stone/shared';
 import { toast } from 'sonner';
 import { instance } from '../config';
 import type { SessionStatus } from './type';

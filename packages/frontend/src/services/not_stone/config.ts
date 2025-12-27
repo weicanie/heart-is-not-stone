@@ -1,5 +1,5 @@
-import type { ServerDataFormat } from '@prisma-ai/shared';
-import { Requester, type RequestConfig } from '../config/requester';
+import type { ServerDataFormat } from '@not_stone/shared';
+import { Requester, type RequestConfig } from './requester';
 
 const config: RequestConfig<unknown, ServerDataFormat> = {
 	baseURL: import.meta.env.VITE_NOT_STONE_BASE_URL || '/not_stone_api',

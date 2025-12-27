@@ -1,17 +1,4 @@
-import {
-	Book,
-	Bot,
-	Brain,
-	FileText,
-	LayoutList,
-	LibraryBig,
-	MonitorCog,
-	SlidersHorizontal,
-	Sparkles,
-	SquarePen,
-	Target,
-	type LucideIcon
-} from 'lucide-react';
+import { MonitorCog, Target, type LucideIcon } from 'lucide-react';
 import * as React from 'react';
 
 import { Logo } from '@/components/Logo';
@@ -30,9 +17,8 @@ import { TeamSwitcher } from './team-switcher';
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 	const navigate = useNavigate();
-	const userInfoData = localStorage.getItem('userInfo');
+	const userInfoData = localStorage.getItem('not_stone_userInfo');
 	const userInfo = userInfoData && JSON.parse(userInfoData);
-	const isOnline = import.meta.env.VITE_IS_ONLINE === 'true';
 
 	//流程、分组
 	const data: {
@@ -67,74 +53,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 			{
 				name: '',
 				logo: Logo,
-				plan: '从简历到offer'
+				plan: '心非木石'
 			}
 		],
 		navMain: [
 			{
-				title: '知识库',
-				icon: LibraryBig,
-				url: '/main/knowledge',
-				groupLabel: '知识库'
-			},
-			{
-				title: '用户记忆',
-				icon: Brain,
-				url: '/main/user-memory'
-			},
-			{
-				title: '项目优化',
-				icon: Sparkles,
-				url: '/main/projects',
-				groupLabel: '简历优化'
-			},
-			{
-				title: 'Prisma',
-				icon: Bot,
-				url: '/main/aichat'
-			},
-			...(isOnline
-				? []
-				: [
-						{
-							title: '匹配岗位',
-							icon: Target,
-							url: '/main/hjm/job',
-							groupLabel: '人岗匹配'
-						}
-					]),
-			{
-				title: '定制简历',
-				icon: FileText,
-				url: '/main/hjm/resume'
-			},
-			{
-				title: '简历组装、导出',
-				icon: LayoutList,
-				url: '/main/resumes',
-				groupLabel: '简历编辑'
-			},
-			{
-				title: '简历编辑器',
-				icon: SquarePen,
-				url: '/main/resume-editor'
-			},
-			...(isOnline
-				? []
-				: [
-						{
-							title: '题库和 anki',
-							icon: Book,
-							url: '/main/offer/anki',
-							groupLabel: '面向offer学习'
-						}
-					]),
-
-			{
-				title: '用户配置',
-				icon: SlidersHorizontal,
-				url: '/main/user-config',
-				groupLabel: '用户配置'
+				title: '档案管理',
+				icon: Target,
+				url: '/main/archive'
 			},
 			...(userInfo?.role === 'admin'
 				? [

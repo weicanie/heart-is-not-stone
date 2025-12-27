@@ -15,7 +15,7 @@ import {
 	type RegistFormType,
 	type RegistResponse,
 	type ServerDataFormat
-} from '@prisma-ai/shared';
+} from '@not_stone/shared';
 import { useMutation } from '@tanstack/react-query';
 import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -23,13 +23,13 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import Prism from '../../../components/Prism';
-import Wall from '../../../components/Wall';
-import { useCustomMutation } from '../../../query/config';
-import { registerCaptcha } from '../../../services/not_stone';
-import { setRegistrationInfo } from '../../../store/login';
-import { useTheme } from '../../../utils/theme';
-import { TextField } from '../../../views/Saas/components/c-cpns/Fields';
+import Prism from '../../components/Prism';
+import Wall from '../../components/Wall';
+import { useCustomMutation } from '../../query/config';
+import { registerCaptcha } from '../../services/not_stone';
+import { setRegistrationInfo } from '../../store/login';
+import { useTheme } from '../../utils/theme';
+import { TextField } from '../Saas/components/c-cpns/Fields';
 export default function Register() {
 	const [isChecked, setIsChecked] = useState(false);
 	const [dialogOpen, setDialogOpen] = useState(false);
@@ -64,7 +64,7 @@ export default function Register() {
 				})
 			);
 			toast.success('注册成功');
-			navigate('/not_stone/login');
+			navigate('/login');
 		}
 	});
 	const registerCaptchaMutation = useCustomMutation<string, string>(registerCaptcha, {

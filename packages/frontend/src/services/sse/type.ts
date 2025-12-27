@@ -1,1 +1,1 @@
-export type { ContextInput as contextInput, SessionStatus, StartParams } from '@prisma-ai/shared';
+export type { SessionStatus, StartParams, ContextInput as contextInput } from '@not_stone/shared';

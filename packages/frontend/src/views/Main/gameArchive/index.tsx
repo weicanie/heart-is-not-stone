@@ -5,19 +5,16 @@ import { ConfigDataTable } from '@/views/Main/components/config-data-table';
 import { type DataTableConfig } from '@/views/Main/components/config-data-table/config.type';
 import { DataTableColumnHeader } from '@/views/Main/components/config-data-table/data-table/columns/header';
 import { PageHeader } from '@/views/Main/components/PageHeader';
-import { type GameArchive } from '@prisma-ai/shared';
+import { type GameArchive } from '@not_stone/shared';
 import { useQueryClient } from '@tanstack/react-query';
 import { Check } from 'lucide-react';
 import React from 'react';
 import { toast } from 'sonner';
 import { useCustomMutation, useCustomQuery } from '../../../query/config';
-import { useTheme } from '../../../utils/theme';
 import { ArchiveCreate } from './ArchiveCreate';
 
 const GameArchivePage: React.FC = () => {
 	const queryClient = useQueryClient();
-	const { setTheme } = useTheme();
-	setTheme('system');
 
 	const { data: archivesData, status: archivesStatus } = useCustomQuery(['archives'], getArchives);
 
@@ -124,12 +121,12 @@ const GameArchivePage: React.FC = () => {
 	};
 
 	return (
-		<div className="min-h-screen w-full bg-background text-foreground">
+		<>
 			<PageHeader
 				title="档案管理"
 				description="为您的游戏存档建立并启用一个档案，每个存档应该对应唯一的档案。如果您切换到另一个存档，就需要为它启用另一个档案。"
 			/>
-			<div className="container mx-auto py-6">
+			<div className="pl-10 pr-10">
 				{curArchive && (
 					<div className="mb-6 p-4 border rounded-lg bg-card text-card-foreground shadow-sm">
 						<h3 className="text-lg font-semibold mb-2">当前正在使用的档案</h3>
@@ -151,7 +148,7 @@ const GameArchivePage: React.FC = () => {
 				)}
 				<ConfigDataTable data={archives} dataTableConfig={dataTableConfig} />
 			</div>
-		</div>
+		</>
 	);
 };
 
